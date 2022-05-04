@@ -6,9 +6,9 @@ const { Content } = Layout;
 const Main = memo(() => {
 	return (
 		<Content
-			className="site-layout-background"
+			// className="site-layout-background"
 			style={{
-				margin: '24px',
+				// margin: '24px',
 				padding: 24,
 				minHeight: 280,
 			}}
