@@ -5,9 +5,9 @@ import router from '@/router';
 import { Spin } from 'antd';
 
 function App() {
-	const [routes, setRoutes] = useState<RouteObject[]>([
+	const [ routes, setRoutes ] = useState<RouteObject[]>([
 		{
-			path: '*', 
+			path: '*',
 			element: (
 				<div id="spin-loading">
 					<Spin size="large"></Spin>

@@ -7,11 +7,11 @@ export default defineConfig({
 		react({
 			babel: {
 				plugins: [
-					['import', {
+					[ 'import', {
 						libraryName: 'antd',
 						libraryDirectory: 'es',
 						style: true
-					}]
+					} ]
 				]
 			}
 		}),
@@ -21,7 +21,7 @@ export default defineConfig({
 			less: {
 				javascriptEnabled: true,
 				modifyVars:{
-					// '@primary-color': 'red'
+					'@primary-color': '#225AF9'
 				},
 			}
 		}
@@ -30,6 +30,6 @@ export default defineConfig({
 		alias: {
 			'@': resolve(__dirname, 'src'),
 		},
-		extensions: ['.js', '.ts', '.jsx', '.tsx', '.json']
+		extensions: [ '.js', '.ts', '.jsx', '.tsx', '.json' ]
 	},
 });
