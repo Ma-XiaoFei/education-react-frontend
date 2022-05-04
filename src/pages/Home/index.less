@@ -5,6 +5,15 @@
   .cardBox {
     display: flex;
 
+    & > div {
+      flex: 1;
+
+      .ant-card-body {
+        max-height: calc(50vh - 70px);
+        overflow-y: auto;
+      }
+    }
+
     .ant-card-body > ul {
       display: flex;
       justify-content: space-between;
@@ -21,7 +30,6 @@
 
     .site-card-border-less-wrapper {
       padding-left: 24px;
-      width: 50%;
     }
   }
 
@@ -46,6 +54,14 @@
   }
 
   .course-box {
+    flex: 1;
     margin-left: 17px;
+  }
+  .cource-name {
+    height: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }

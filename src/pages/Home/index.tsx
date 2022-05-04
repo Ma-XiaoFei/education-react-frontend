@@ -74,6 +74,16 @@ const coursesLists = [
 		coursesTime: 'iconfont12:24',
 	},
 	{
+		coursesTitle:'课程名称课程名称课程名称课程名称课程名称课程名称课程名称课程名称课程名称课程名称课程名称课程名称课程名称课程名称课程名称课程名称',
+		coursesName: 'iconfont张丽',
+		coursesTime: 'iconfont12:24',
+	},
+	{
+		coursesTitle: '课程名称课程名称课程名称课程名称',
+		coursesName: 'iconfont张丽',
+		coursesTime: 'iconfont12:24',
+	},
+	{
 		coursesTitle: '课程名称课程名称课程名称课程名称',
 		coursesName: 'iconfont张丽',
 		coursesTime: 'iconfont12:24',
@@ -92,19 +102,16 @@ const Home = memo(() => {
 		<div className="homeBox">
 			<div className="cardBox">
 				{/* <div> */}
-				<Card
-					size="small"
-					title="Learning courses"
-					bordered={false}
-					style={{ width: '50%' }}
-				>
+				<Card size="small" title="Learning courses" bordered={false}>
 					{coursesLists.map((t, i) => {
 						return (
 							<ul key={i}>
 								<li className="flex-1 flex-box">
 									<div className="icon-course"></div>
 									<div className="course-box">
-										<p className="text-ellipsis">{t.coursesTitle}</p>
+										<p className="cource-name" title={t.coursesTitle}>
+											{t.coursesTitle}
+										</p>
 										<p className="user">
 											<i></i> {t.coursesName}
 										</p>
@@ -121,7 +128,6 @@ const Home = memo(() => {
 						);
 					})}
 				</Card>
-				{/* </div> */}
 				<div className="site-card-border-less-wrapper">
 					<Card size="small" title="Wait for the items" bordered={false}>
 						<p>Card content</p>
@@ -130,11 +136,10 @@ const Home = memo(() => {
 					</Card>
 				</div>
 			</div>
-			{/* 表格 */}
 			<div className="tabelBox">
 				<Card size="small" title="Recent feedback" bordered={false}>
 					<Table
-						scroll={{ x: 500 }}
+						scroll={{ x: 500,y:100 }}
 						columns={Tablecolumns}
 						dataSource={Tabledata}
 						size="small"
