@@ -33,7 +33,7 @@ const Tablecolumns = [
 	{
 		title: '操作',
 		dataIndex: 'address',
-	}
+	},
 ];
 const Tabledata = [
 	{
@@ -65,56 +65,65 @@ const Tabledata = [
 		name: 'Joe Black',
 		age: 32,
 		address: 'Sidney No. 1 Lake Park',
-	}
+	},
 ];
 const coursesLists = [
 	{
-		coursesTitle:'课程名称课程名称课程名称课程名称',
-		coursesName:'iconfont张丽',
-		coursesTime:'iconfont12:24',
-
+		coursesTitle: '课程名称课程名称课程名称课程名称',
+		coursesName: 'iconfont张丽',
+		coursesTime: 'iconfont12:24',
 	},
 	{
-		coursesTitle:'课程名称课程名称课程名称课程名称',
-		coursesName:'iconfont张丽',
-		coursesTime:'iconfont12:24',
-
+		coursesTitle: '课程名称课程名称课程名称课程名称',
+		coursesName: 'iconfont张丽',
+		coursesTime: 'iconfont12:24',
 	},
 	{
-		coursesTitle:'课程名称课程名称课程名称课程名称',
-		coursesName:'iconfont张丽',
-		coursesTime:'iconfont12:24',
-
-	}
+		coursesTitle: '课程名称课程名称课程名称课程名称',
+		coursesName: 'iconfont张丽',
+		coursesTime: 'iconfont12:24',
+	},
 ];
 const Home = memo(() => {
-	const onChange = (pageNumber)=> {
+	const onChange = (pageNumber) => {
 		// console.log('Page: ', pageNumber);
 	};
 	return (
 		<div className="homeBox">
 			<div className="cardBox">
 				{/* <div> */}
-				<Card size="small" title="Learning courses" bordered={false} style={{ width: '50%' }}>
-					{
-						coursesLists.map((t,i)=> {
-							return (
-								<ul key={i}>
-									<li>显示图片</li>
-									<li>
-										<p>{t.coursesTitle}</p>
-										<p>{t.coursesName}</p>
-										<p>{t.coursesTime}</p>
-									</li>
-									<li><Button type="primary">Learing</Button></li>
-								</ul>
-							);
-						})
-					}
+				<Card
+					size="small"
+					title="Learning courses"
+					bordered={false}
+					style={{ width: '50%' }}
+				>
+					{coursesLists.map((t, i) => {
+						return (
+							<ul key={i}>
+								<li className="flex-1 flex-box">
+									<div className="icon-course"></div>
+									<div className="course-box">
+										<p className="text-ellipsis">{t.coursesTitle}</p>
+										<p className="user">
+											<i></i> {t.coursesName}
+										</p>
+										<p className="course-time">
+											<i></i>
+											{t.coursesTime}
+										</p>
+									</div>
+								</li>
+								<li>
+									<Button type="primary">Learing</Button>
+								</li>
+							</ul>
+						);
+					})}
 				</Card>
 				{/* </div> */}
 				<div className="site-card-border-less-wrapper">
-					<Card size="small" title="Wait for the items" bordered={false} style={{ width: '50%' }}>
+					<Card size="small" title="Wait for the items" bordered={false}>
 						<p>Card content</p>
 						<p>Card content</p>
 						<p>Card content</p>
@@ -123,8 +132,19 @@ const Home = memo(() => {
 			</div>
 			{/* 表格 */}
 			<div className="tabelBox">
-				<Table columns={Tablecolumns} dataSource={Tabledata} size="small" pagination={false}/>
-				<Pagination showQuickJumper defaultCurrent={2} total={500} onChange={onChange} />
+				<Card size="small" title="Recent feedback" bordered={false}>
+					<Table
+						scroll={{ x: 500 }}
+						columns={Tablecolumns}
+						dataSource={Tabledata}
+						size="small"
+						pagination={{
+							total: 500,
+							defaultCurrent: 2,
+							showQuickJumper: true,
+						}}
+					/>
+				</Card>
 			</div>
 		</div>
 	);
