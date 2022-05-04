@@ -1,5 +1,6 @@
-import React, { memo, useCallback, useState } from 'react';
-import { Layout, Menu } from 'antd';
+import React, { memo, useCallback, useMemo, useState } from 'react';
+import { Layout, Menu, MenuItemProps } from 'antd';
+import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import {
 	MenuUnfoldOutlined,
 	MenuFoldOutlined,
@@ -7,11 +8,41 @@ import {
 	VideoCameraOutlined,
 	UploadOutlined,
 } from '@ant-design/icons';
+import routes from '@/router/routerMap';
+import { useNavigate } from 'react-router-dom';
 
 const { Sider } = Layout;
 
+function deepMenuItems(r: typeof routes | []) {
+	if (!r) return [];
+	const arr: ItemType[] = [];
+	r.forEach((t) => {
+		if (t.menu || t.subMenu) {
+			arr.push({
+				key: '' + (t.path||'/'),
+				icon: <UserOutlined />,
+				label: t.title,
+			});
+		}
+		if (t.children) {
+			arr.push(...deepMenuItems(t.children));
+		}
+	});
+	return arr;
+}
+
 const SiderComponent = memo(() => {
+	const navigate = useNavigate();
 	const [ collapsed, setCollapsed ] = useState(false);
+
+	const menuItems = useMemo(() => {
+		const rootRoute = routes.find((t) => t.path === '/');
+		if (rootRoute) {
+			return deepMenuItems([ rootRoute ]);
+		} else {
+			return [];
+		}
+	}, []);
 
 	const toggle = useCallback(() => {
 		setCollapsed(!collapsed);
@@ -25,7 +56,7 @@ const SiderComponent = memo(() => {
 			collapsible
 			collapsed={collapsed}
 		>
-			<div className='flex-space'>
+			<div className="flex-space">
 				<div className="logo" />
 				{React.createElement(
 					collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
@@ -40,23 +71,8 @@ const SiderComponent = memo(() => {
 				theme="light"
 				mode="inline"
 				defaultSelectedKeys={[ '1' ]}
-				items={[
-					{
-						key: '1',
-						icon: <UserOutlined />,
-						label: 'nav 1',
-					},
-					{
-						key: '2',
-						icon: <VideoCameraOutlined />,
-						label: 'nav 2',
-					},
-					{
-						key: '3',
-						icon: <UploadOutlined />,
-						label: 'nav 3',
-					},
-				]}
+				items={menuItems}
+				onClick={({ key }) => navigate(key)}
 			/>
 		</Sider>
 	);

@@ -21,7 +21,8 @@ export default defineConfig({
 			less: {
 				javascriptEnabled: true,
 				modifyVars:{
-					'@primary-color': '#225AF9'
+					'@primary-color': '#225AF9',
+					'@layout-header-background': '#FFF'
 				},
 			}
 		}
