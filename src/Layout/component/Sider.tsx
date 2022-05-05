@@ -49,7 +49,7 @@ const SiderComponent = memo(() => {
 
 	return (
 		<Sider
-			width={200}
+			width={220}
 			theme="light"
 			trigger={null}
 			collapsible

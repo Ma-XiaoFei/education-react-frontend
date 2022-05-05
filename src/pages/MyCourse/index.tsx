@@ -1,7 +1,8 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import { Table, Space, Input, Form, Select, Button } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { ColumnsType } from 'antd/es/table';
+
 
 interface ColsType {
 	coursename: string
@@ -49,7 +50,7 @@ const MyCourse = memo(() => {
 			width: '150px',
 			render: () => (
 				<Space>
-					<a>详情</a>
+					<a onClick={handleDetail}>详情</a>
 					<a>评分</a>
 					<a>作业</a>
 				</Space>
@@ -108,6 +109,10 @@ const MyCourse = memo(() => {
 			description: '从专业角度分析电商运营技巧，课…',
 		},
 	];
+
+	const handleDetail = ()=> {
+		console.log(9);
+	};
 	return (
 		<div>
 			<Form

@@ -1,13 +1,17 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import { Table, Space, Input, Form, Select, Button, Row, Col } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { ColumnsType } from 'antd/es/table';
+import Modal from '@/component/Modal';
+import utils from '@/utils';
 
 interface ColsType {
   coursename: string;
 }
 
 const MyCourse = memo(() => {
+	const [ form ] = Form.useForm();
+	const [ detailModalStatus, setDetailModalStatus ] = useState(false);
 	const Tablecolumns: ColumnsType<ColsType> = [
 		{
 			title: '账号',
@@ -32,8 +36,8 @@ const MyCourse = memo(() => {
 			fixed: 'right',
 			render: () => (
 				<Space>
-					<a>详情</a>
-					<a>禁用</a>
+					<a onClick={handleDetail}>详情</a>
+					<a >禁用</a>
 				</Space>
 			),
 		},
@@ -45,6 +49,18 @@ const MyCourse = memo(() => {
 		createTime: '2022-09-08 08:35:26',
 		status: '启用',
 	});
+
+	const handleApply = ()=> {
+		utils.confirm({
+			title: '课程申请',
+			content: '确定要申请该课程吗'
+		});
+	};
+
+	const handleDetail = ()=> {
+		setDetailModalStatus(true);
+	};
+
 	return (
 		<div>
 			<Row>
@@ -65,6 +81,45 @@ const MyCourse = memo(() => {
 					showQuickJumper: true,
 				}}
 			/>
+
+			<Modal
+				title='Course detail'
+				visible={detailModalStatus}
+				confirmText="确定"
+				confirmCallback={()=> {
+					setDetailModalStatus(false);
+				}}
+				cancelCallback={()=> {
+					setDetailModalStatus(false);
+				}}>
+				<Form
+					wrapperCol={{ span: 12 }}
+					labelCol={{ span: 12 }}
+					form={form}
+					onFinish={()=> {
+
+					}}
+				>
+					<Form.Item
+						name='Course Name'
+						label='Course Name'
+					>
+						sss
+					</Form.Item>
+					<Form.Item
+						name='Course Name'
+						label='Course Name'
+					>
+						sss
+					</Form.Item>
+					<Form.Item
+						name='Course Name'
+						label='Course Name'
+					>
+						sss
+					</Form.Item>
+				</Form>
+			</Modal>
 		</div>
 	);
 });

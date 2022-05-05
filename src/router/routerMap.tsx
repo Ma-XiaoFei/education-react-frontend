@@ -27,7 +27,7 @@ interface RoutesMap {
 const routes: RoutesMap[] = [
 	{
 		menu: false,
-		title: '登录',
+		title: 'Login',
 		path: '/login',
 		element: <Login />,
 	},
@@ -38,7 +38,7 @@ const routes: RoutesMap[] = [
 		children: [
 			{
 				menu: true,
-				title: '首页看板',
+				title: 'Home Page Kanban',
 				index:true,
 				icon: 'icon-shouyekanban',
 				element: wrapper(<Home />),
@@ -46,42 +46,42 @@ const routes: RoutesMap[] = [
 			{
 				menu: true,
 				icon: 'icon-quanbukecheng',
-				title: '全部课程',
+				title: 'All Courses',
 				path: '/allCourse',
 				element: wrapper(<AllCourse />),
 			},
 			{
 				menu: true,
 				icon: 'icon-wodekecheng',
-				title: '我的课程',
+				title: 'My Courses',
 				path: '/myCourse',
 				element: wrapper(<MyCourse />),
 			},
 			{
 				menu: true,
 				icon: 'icon-kechengguanli-gaoliang',
-				title: '课程管理',
+				title: 'Course Management',
 				path: '/courseManage',
 				element: wrapper(<CourseManage />),
 			},
 			{
 				menu: true,
 				icon: 'icon-zhanghaoguanli',
-				title: '账号管理',
+				title: 'Account Management',
 				path: '/accountManage',
 				element: wrapper(<AccountManage />),
 			},
 			{
 				menu: true,
 				icon: 'icon-jiangshiguanli',
-				title: '讲师管理',
+				title: 'Lecturer Management',
 				path: '/lecturerManage',
 				element: wrapper(<LecturerManage />),
 			},
 			{
 				menu: true,
 				icon: 'icon-xueshengguanli',
-				title: '学生管理',
+				title: 'Student Management',
 				path: '/studentManage',
 				element: wrapper(<StudentManage />),
 			},

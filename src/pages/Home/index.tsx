@@ -16,17 +16,17 @@ interface ColsType {
 const Tabledata: ColsType[] = [
 	...Array.from({ length: 50 }, () => ({
 		key: Math.random(),
-		lessonName: '课程名称课程名称1',
-		teacher: '课程',
-		mes: '做的还不错，继续努力',
+		lessonName: 'Name',
+		teacher: 'lucy',
+		mes: 'Not a bad job, keep up the good work',
 		date: '2022-06-12 14:00:00',
 		score: 78,
 	})),
 ];
 
 const coursesLists = Array(10).fill({
-	coursesTitle: '课程名称课程名称课程名称课程名称',
-	coursesName: 'iconfont张丽',
+	coursesTitle: 'course name',
+	coursesName: 'lucy',
 	coursesTime: '12:24',
 });
 const Home = memo(() => {
@@ -38,31 +38,31 @@ const Home = memo(() => {
 
 	const Tablecolumns: ColumnsType<ColsType> = [
 		{
-			title: '序号',
+			title: 'Serial number',
 			render: (t, r, i: number) => i + 1,
 		},
 		{
-			title: '课程名称',
+			title: 'Course Name',
 			dataIndex: 'lessonName',
 		},
 		{
-			title: '讲师',
+			title: 'Lecturer',
 			dataIndex: 'teacher',
 		},
 		{
-			title: '作业评分',
+			title: 'Assignment Grading',
 			dataIndex: 'score',
 		},
 		{
-			title: '评语',
+			title: 'Comments',
 			dataIndex: 'mes',
 		},
 		{
-			title: '操作时间',
+			title: 'Operation time',
 			dataIndex: 'date',
 		},
 		{
-			title: '操作',
+			title: 'Operation',
 			align: 'center',
 			render: (t, record, index: number) => {
 				return <Button
@@ -149,9 +149,9 @@ const Home = memo(() => {
 									<ul key={t}>
 										<li className="flex-space">
 											<span>
-												<i className="iconfont icon-file-pdf"></i>作业题目.pdf
+												<i className="iconfont icon-file-pdf"></i>Job-title.pdf
 											</span>
-											<span style={{ color: '#666' }}>课程名称</span>
+											<span style={{ color: '#666' }}>course name</span>
 											<Button
 												type="link"
 												onClick={pushMyCourse}

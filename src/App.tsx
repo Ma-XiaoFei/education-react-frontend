@@ -2,7 +2,7 @@ import React from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { BrowserRouter, RouteObject, useRoutes } from 'react-router-dom';
 import router from '@/router';
-import { Spin } from 'antd';
+import { Spin,Modal } from 'antd';
 
 function App() {
 	const [ routes, setRoutes ] = useState<RouteObject[]>([

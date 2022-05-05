@@ -1,102 +1,85 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import './index.less';
 import { Table, Space, Input, Row, Form, Select, Button } from 'antd';
 import { SearchOutlined, LockOutlined } from '@ant-design/icons';
+import { ColumnsType } from 'antd/es/table';
+import utils from '@/utils';
+import Modal from '@/component/Modal';
+
+interface colType {
+  coursename: string;
+}
 
 const AllCourse = memo(() => {
-	const Tablecolumns = [
+	const [ form ] = Form.useForm();
+	const [ detailModalStatus, setDetailModalStatus ] = useState(false);
+	const Tablecolumns: ColumnsType<colType> = [
 		{
-			title: '课程名称',
+			title: 'Course Name',
 			dataIndex: 'coursename',
 		},
 		{
-			title: '开始时间',
+			title: 'Start time',
+			width: '180px',
 			dataIndex: 'starttime',
 		},
 		{
-			title: '时长',
+			title: 'Duration',
 			dataIndex: 'duration',
 		},
 		{
-			title: '讲师',
+			title: 'Lecturer',
 			dataIndex: 'lecturer',
 		},
 		{
-			title: '状态',
+			title: 'Status',
 			dataIndex: 'state',
 		},
 		{
-			title: '所属机构',
+			title: 'Affiliation',
 			dataIndex: 'organization',
 		},
 		{
-			title: '课程描述',
+			title: 'Course Description',
+			width: '200px',
 			dataIndex: 'description',
 		},
 		{
-			title: '操作',
+			title: 'Operation',
 			dataIndex: 'operation',
-			// align:'center',
+			align: 'center',
+			width: '150px',
+			fixed: 'right',
 			render: () => (
-				<Space size="middle">
-					<a>详情</a>
-					<a>申请</a>
+				<Space>
+					<a onClick={handleDetail}>Details</a>
+					<a onClick={handleApply}>Application</a>
 				</Space>
 			),
 		},
 	];
-	const Tabledata = [
-		{
-			key: '1',
-			coursename: '电商运营妙招',
-			starttime: '2022-06-12 14:00:00',
-			duration: '120分钟',
-			lecturer: '张立',
-			state: '未开始',
-			organization: '机构1',
-			description: '从专业角度分析电商运营技巧，课…',
-		},
-		{
-			key: '2',
-			coursename: '电商运营妙招',
-			starttime: '2022-06-12 14:00:00',
-			duration: '120分钟',
-			lecturer: '张立',
-			state: '未开始',
-			organization: '机构1',
-			description: '从专业角度分析电商运营技巧，课…',
-		},
-		{
-			key: '3',
-			coursename: '电商运营妙招',
-			starttime: '2022-06-12 14:00:00',
-			duration: '120分钟',
-			lecturer: '张立',
-			state: '未开始',
-			organization: '机构1',
-			description: '从专业角度分析电商运营技巧，课…',
-		},
-		{
-			key: '4',
-			coursename: '电商运营妙招',
-			starttime: '2022-06-12 14:00:00',
-			duration: '120分钟',
-			lecturer: '张立',
-			state: '未开始',
-			organization: '机构1',
-			description: '从专业角度分析电商运营技巧，课…',
-		},
-		{
-			key: '5',
-			coursename: '电商运营妙招',
-			starttime: '2022-06-12 14:00:00',
-			duration: '120分钟',
-			lecturer: '张立',
-			state: '未开始',
-			organization: '机构1',
-			description: '从专业角度分析电商运营技巧，课…',
-		},
-	];
+	const Tabledata = Array(20).fill({
+		key: '1',
+		coursename: 'name',
+		starttime: '2022-06-12 14:00:00',
+		duration: '120分钟',
+		lecturer: 'lucy',
+		state: 'Not started',
+		organization: 'Institution1',
+		description: 'Analysis of e-commerce operation skills from a professional perspective, class...',
+	});
+
+	const handleApply = ()=> {
+		utils.confirm({
+			title: '课程申请',
+			content: '确定要申请该课程吗'
+		});
+	};
+
+	const handleDetail = ()=> {
+		setDetailModalStatus(true);
+	};
+
 	return (
 		<div>
 			<Form
@@ -108,23 +91,23 @@ const AllCourse = memo(() => {
 				}}
 			>
 				<Form.Item name="username">
-					<Input suffix={<SearchOutlined />} placeholder="输入课程/讲师名称" />
+					<Input suffix={<SearchOutlined />} placeholder="Please enter the name of the course/instructor" />
 				</Form.Item>
 				<Form.Item name="status">
 					<Select
 						style={{ width: 200 }}
-						placeholder="请选择状态"
+						placeholder="Please select the status"
 						options={[
 							{
-								label: '未开始',
+								label: 'Not started',
 								value: 0,
 							},
 							{
-								label: '进行中',
+								label: 'In progress',
 								value: 1,
 							},
 							{
-								label: '已结束',
+								label: 'Closed',
 								value: 3,
 							},
 						]}
@@ -132,14 +115,14 @@ const AllCourse = memo(() => {
 				</Form.Item>
 				<Form.Item>
 					<Space>
-						<Button type="primary">查询</Button>
-						<Button>重置</Button>
+						<Button type="primary">Inquiry</Button>
+						<Button>Reset</Button>
 					</Space>
 				</Form.Item>
 			</Form>
 			<Table
 				style={{ marginTop: 12 }}
-				scroll={{ x: 500 }}
+				scroll={{ x: 1000, y: 1000 }}
 				columns={Tablecolumns}
 				dataSource={Tabledata}
 				size="small"
@@ -150,6 +133,46 @@ const AllCourse = memo(() => {
 					showQuickJumper: true,
 				}}
 			/>
+
+			<Modal
+				title='Course detail'
+				visible={detailModalStatus}
+				confirmText="确定"
+				confirmCallback={()=> {
+					setDetailModalStatus(false);
+				}}
+				cancelCallback={()=> {
+					setDetailModalStatus(false);
+				}}>
+				<Form
+					wrapperCol={{ span: 12 }}
+					labelCol={{ span: 12 }}
+					form={form}
+					onFinish={()=> {
+
+					}}
+				>
+					<Form.Item
+						name='Course Name'
+						label='Course Name'
+					>
+						sss
+					</Form.Item>
+					<Form.Item
+						name='Course Name'
+						label='Course Name'
+					>
+						sss
+					</Form.Item>
+					<Form.Item
+						name='Course Name'
+						label='Course Name'
+					>
+						sss
+					</Form.Item>
+				</Form>
+			</Modal>
+
 		</div>
 	);
 });

@@ -42,6 +42,7 @@
         "object-curly-spacing": ["error", "always"],
         "eqeqeq": [2, "allow-null"],
         "no-multiple-empty-lines": [1, {"max": 2}],
-        "no-trailing-spaces": "error"
+        "no-trailing-spaces": "error",
+        "@typescript-eslint/no-empty-function": "off"
     }
 }
