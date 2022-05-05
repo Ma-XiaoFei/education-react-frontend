@@ -1,15 +1,13 @@
 import React, { memo, useCallback, useMemo, useState } from 'react';
-import { Layout, Menu, MenuItemProps } from 'antd';
+import { Layout, Menu } from 'antd';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import {
 	MenuUnfoldOutlined,
 	MenuFoldOutlined,
 	UserOutlined,
-	VideoCameraOutlined,
-	UploadOutlined,
 } from '@ant-design/icons';
 import routes from '@/router/routerMap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const { Sider } = Layout;
 
@@ -20,7 +18,7 @@ function deepMenuItems(r: typeof routes | []) {
 		if (t.menu || t.subMenu) {
 			arr.push({
 				key: '' + (t.path||'/'),
-				icon: <UserOutlined />,
+				icon: <i className={`iconfont ${t.icon}`}></i>,
 				label: t.title,
 			});
 		}
@@ -33,6 +31,7 @@ function deepMenuItems(r: typeof routes | []) {
 
 const SiderComponent = memo(() => {
 	const navigate = useNavigate();
+	const location = useLocation();
 	const [ collapsed, setCollapsed ] = useState(false);
 
 	const menuItems = useMemo(() => {
@@ -50,7 +49,7 @@ const SiderComponent = memo(() => {
 
 	return (
 		<Sider
-			width={240}
+			width={200}
 			theme="light"
 			trigger={null}
 			collapsible
@@ -70,7 +69,7 @@ const SiderComponent = memo(() => {
 			<Menu
 				theme="light"
 				mode="inline"
-				defaultSelectedKeys={[ '1' ]}
+				selectedKeys={[ location.pathname ]}
 				items={menuItems}
 				onClick={({ key }) => navigate(key)}
 			/>

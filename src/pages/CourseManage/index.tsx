@@ -1,17 +1,31 @@
 import React, { memo } from 'react';
-import { Table, Space, Input, Form, Select, Button } from 'antd';
+import {
+	Table,
+	Space,
+	Input,
+	Form,
+	Select,
+	Button,
+	Row,
+	Col,
+	Tabs,
+} from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { ColumnsType } from 'antd/es/table';
+import CourseApply from './CourseApply';
+import './index.less';
+
+const { TabPane } = Tabs;
 
 interface ColsType {
-	coursename: string
+  coursename: string;
 }
 
-const MyCourse = memo(() => {
+const CourseManage = memo(() => {
 	const Tablecolumns: ColumnsType<ColsType> = [
 		{
 			title: '序号',
-			render:(t: string,r: any,i: number)=> i+1
+			render: (t: string, r: any, i: number) => i + 1,
 		},
 		{
 			title: '课程名称',
@@ -44,7 +58,7 @@ const MyCourse = memo(() => {
 		{
 			title: '操作',
 			dataIndex: 'operation',
-			align:'center',
+			align: 'center',
 			fixed: 'right',
 			width: '150px',
 			render: () => (
@@ -109,60 +123,83 @@ const MyCourse = memo(() => {
 		},
 	];
 	return (
-		<div>
-			<Form
-				// form={form}
-				// name="horizontal_login"
-				layout="inline"
-				onFinish={(data) => {
-					console.log(data);
+		<div style={{ marginTop: '-10px' }}>
+			<Tabs
+				defaultActiveKey="1"
+				onChange={(e) => {
+					console.log(e);
 				}}
 			>
-				<Form.Item name="username">
-					<Input suffix={<SearchOutlined />} placeholder="输入课程/讲师名称" />
-				</Form.Item>
-				<Form.Item name="status">
-					<Select
-						style={{ width: 200 }}
-						placeholder="请选择状态"
-						options={[
-							{
-								label: '未开始',
-								value: 0,
-							},
-							{
-								label: '进行中',
-								value: 1,
-							},
-							{
-								label: '已结束',
-								value: 3,
-							},
-						]}
+				<TabPane tab="课程管理" key="1">
+					<Row>
+						<Col span={20}>
+							<Form
+								// form={form}
+								// name="horizontal_login"
+								layout="inline"
+								onFinish={(data) => {
+									console.log(data);
+								}}
+							>
+								<Form.Item name="username">
+									<Input
+										suffix={<SearchOutlined />}
+										placeholder="输入课程/讲师名称"
+									/>
+								</Form.Item>
+								<Form.Item name="status">
+									<Select
+										style={{ width: 200 }}
+										placeholder="请选择状态"
+										options={[
+											{
+												label: '未开始',
+												value: 0,
+											},
+											{
+												label: '进行中',
+												value: 1,
+											},
+											{
+												label: '已结束',
+												value: 3,
+											},
+										]}
+									/>
+								</Form.Item>
+								<Form.Item>
+									<Space>
+										<Button type="primary">查询</Button>
+										<Button>重置</Button>
+									</Space>
+								</Form.Item>
+							</Form>
+						</Col>
+						<Col span={4} style={{ textAlign: 'right' }}>
+							<Button type="primary">添加课程</Button>
+						</Col>
+					</Row>
+
+					<Table
+						style={{ marginTop: 12 }}
+						scroll={{ x: 1000 }}
+						columns={Tablecolumns}
+						dataSource={Tabledata}
+						size="small"
+						pagination={{
+							// size:'default',
+							total: 500,
+							defaultCurrent: 2,
+							showQuickJumper: true,
+						}}
 					/>
-				</Form.Item>
-				<Form.Item>
-					<Space>
-						<Button type="primary">查询</Button>
-						<Button>重置</Button>
-					</Space>
-				</Form.Item>
-			</Form>
-			<Table
-				style={{ marginTop: 12 }}
-				scroll={{ x: 1000 }}
-				columns={Tablecolumns}
-				dataSource={Tabledata}
-				size="small"
-				pagination={{
-					// size:'default',
-					total: 500,
-					defaultCurrent: 2,
-					showQuickJumper: true,
-				}}
-			/>
+				</TabPane>
+				<TabPane tab="课程申请" key="2">
+					<CourseApply/>
+				</TabPane>
+			</Tabs>
 		</div>
 	);
 });
 
-export default MyCourse;
+export default CourseManage;

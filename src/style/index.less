@@ -1,5 +1,6 @@
 @import "./theme.less";
 @import "./layout.less";
+@import "./iconfont/index.less";
 
 * {
   padding: 0;
@@ -40,4 +41,26 @@ ul > li {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.ant-table {
+  tr th {
+    font-size: 14px;
+    color: #909399 !important;
+  }
+  tbody.ant-table-tbody tr td {
+    color: #606266 !important;
+    height: 48px;
+  }
+  tbody.ant-table-tbody tr:nth-child(2n + 1) td {
+    background-color: #fafbfe;
+  }
+}
+
+.ant-btn {
+  width: 112px;
+}
+
+.iconfont{
+  margin-right: 3px;
 }

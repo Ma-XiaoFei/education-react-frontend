@@ -9,7 +9,8 @@
       flex: 1;
 
       .ant-card-body {
-        max-height: calc(50vh - 70px);
+        // max-height: calc(50vh - 70px);
+        max-height: 300px;
         overflow-y: auto;
       }
     }
@@ -29,6 +30,7 @@
     }
 
     .site-card-border-less-wrapper {
+      width: calc(100% - 1000px);
       padding-left: 24px;
     }
   }
@@ -44,7 +46,12 @@
 
   .icon-course {
     width: 80px;
-    background-color: red;
+    background: url("@/static/img/start-course.png") no-repeat;
+    background-size: contain;
+  }
+
+  .icon-file-pdf {
+    color: #2d5ef0;
   }
 
   .course-time,
@@ -63,5 +70,47 @@
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  .ant-table-wrapper .ant-table-body {
+    max-height: calc(100vh - 660px) !important;
+  }
+  .ant-tabs-tab-btn {
+    width: 90px;
+    height: 88px;
+    color: #225af9;
+    background-color: #f3f7fe;
+    border: 1px solid #225af9;
+    border-radius: 6px;
+  }
+  .ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #fff;
+    background-color: #225af9;
+  }
+  .tabs-date {
+    .title {
+      font-size: 14px;
+      padding: 9px 0 4px 9px;
+      border-bottom: 1px solid;
+    }
+    .date {
+      margin: 0 9px 12px 0;
+      font-size: 32px;
+      text-align: right;
+    }
+  }
+  .ant-tabs-top > .ant-tabs-nav::before {
+    display: none;
+  }
+  .ant-tabs-content-holder {
+    display: none;
+  }
+  .ant-tabs-ink-bar {
+    display: none;
+  }
+  .test-content {
+    ul > li {
+      border-bottom: 1px solid #f2f2f2;
+    }
   }
 }
