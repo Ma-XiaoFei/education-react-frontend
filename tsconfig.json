@@ -5,6 +5,7 @@
     "allowJs": false,
     "strict": true,
     "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "module": "ESNext",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
@@ -16,6 +17,6 @@
       "@/*":["src/*"]
     }
   },
-  "include": ["src"],
+  "include": ["./src/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -31,7 +31,7 @@ const coursesLists = Array(10).fill({
 });
 const Home = memo(() => {
 	const navigate = useNavigate();
-	const onChange = (pageNumber) => {
+	const onChange = () => {
 		// console.log('Page: ', pageNumber);
 	};
 
