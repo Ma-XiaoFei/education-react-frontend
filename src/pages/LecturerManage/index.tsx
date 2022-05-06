@@ -10,54 +10,54 @@ interface ColsType {
 const lecturerManage = memo(() => {
 	const Tablecolumns: ColumnsType<ColsType> = [
 		{
-			title: '序号',
+			title: 'Serial number',
 			render: (t: string, r: any, i: number) => i + 1,
 		},
 		{
-			title: '讲师姓名',
+			title: 'Lecturer name',
 			dataIndex: 'coursename',
 		},
 		{
-			title: '性别',
+			title: 'Gender',
 			dataIndex: 'gender',
 		},
 		{
-			title: '邮箱',
+			title: 'Mailbox',
 			dataIndex: 'duration',
 		},
 		{
-			title: '授课进度',
+			title: 'Class schedule',
 			dataIndex: 'step',
 		},
 		{
-			title: '添加时间',
+			title: 'Add time',
 			dataIndex: 'starttime',
 		},
 		{
-			title: '操作',
+			title: 'Operation',
 			dataIndex: 'operation',
-			width:'200px',
+			width:'240px',
 			align: 'center',
 			fixed: 'right',
 			render: () => (
 				<Space>
-					<a>详情</a>
-					<a>重置密码</a>
-					<a>删除</a>
+					<a>Details</a>
+					<a>Reset Password</a>
+					<a>Delete</a>
 				</Space>
 			),
 		},
 	];
 	const Tabledata = Array(20).fill({
 		key: '1',
-		coursename: '电商运营妙招',
+		coursename: 'E-commerce operation tricks',
 		starttime: '2022-06-12 14:00:00',
-		duration: '120分钟',
-		lecturer: '张立',
+		duration: '120 minutes',
+		lecturer: 'Zhang Li',
 		step: '1/10',
-		gender:'男',
-		organization: '机构1',
-		description: '从专业角度分析电商运营技巧，课…',
+		gender:'Male',
+		organization: 'Institution 1',
+		description: 'Analysis of e-commerce operation skills from a professional perspective, class...',
 	});
 	return (
 		<div>
@@ -74,19 +74,19 @@ const lecturerManage = memo(() => {
 						<Form.Item name="username">
 							<Input
 								suffix={<SearchOutlined />}
-								placeholder="输入讲师姓名"
+								placeholder="Enter the name of the instructor"
 							/>
 						</Form.Item>
 						<Form.Item>
 							<Space>
-								<Button type="primary">查询</Button>
-								<Button>重置</Button>
+								<Button type="primary">Inquiry</Button>
+								<Button>Reset</Button>
 							</Space>
 						</Form.Item>
 					</Form>
 				</Col>
 				<Col span={4} style={{ textAlign: 'right' }}>
-					<Button type="primary">添加讲师</Button>
+					<Button type="primary">Add Instructor</Button>
 				</Col>
 			</Row>
 

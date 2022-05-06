@@ -1,0 +1,69 @@
+#student-manage {
+  .institution-box {
+    margin: -16px 0 -16px -16px;
+    height: calc(100vh - 100px);
+    border-right: 1px solid #e8eaf1;
+
+    .iconfont {
+      display: none;
+    }
+
+    .box-title {
+      width: 100%;
+      height: 64px;
+      line-height: 64px;
+      text-align: center;
+      border-bottom: 1px solid #e8eaf1;
+    }
+
+    .ant-tree-treenode {
+      &:hover {
+        .iconfont {
+          display: inline-block;
+        }
+      }
+      border-bottom: 1px solid #f1f5ff;
+    }
+    .ant-tree-switcher {
+      display: none;
+    }
+    .ant-tree-indent {
+      display: none;
+    }
+    .tree-box {
+      width: 170px;
+      height: 40px;
+      line-height: 40px;
+    }
+    .ant-tree-node-content-wrapper {
+      padding-left: 24px;
+    }
+    .ant-tree-treenode:first-child {
+      .ant-tree-switcher {
+        display: block !important;
+      }
+      .ant-tree-node-content-wrapper {
+        background-color: transparent;
+        padding: 0;
+      }
+    }
+    .ant-tree .ant-tree-treenode {
+        width: 100%;
+      padding: 0 !important;
+    }
+    .ant-tree-treenode-selected:not(:first-child) {
+      color: #225af9;
+      background-color: #f0f6ff;
+    }
+    .ant-tree-node-selected {
+      background-color: inherit;
+    }
+
+    .ant-tree-switcher {
+      line-height: 40px;
+    }
+  }
+  .right-main {
+    width: 100px;
+  }
+}

@@ -14,30 +14,30 @@ const MyCourse = memo(() => {
 	const [ detailModalStatus, setDetailModalStatus ] = useState(false);
 	const Tablecolumns: ColumnsType<ColsType> = [
 		{
-			title: '账号',
+			title: 'Account Number',
 			dataIndex: 'account',
 		},
 		{
-			title: '邮箱',
+			title: 'Mailbox',
 			dataIndex: 'email',
 		},
 		{
-			title: '状态',
+			title: 'Status',
 			dataIndex: 'status',
 		},
 		{
-			title: '创建时间',
+			title: 'Creation time',
 			dataIndex: 'createTime',
 		},
 		{
-			title: '操作',
+			title: 'Operation',
 			dataIndex: 'operation',
 			align: 'center',
 			fixed: 'right',
 			render: () => (
 				<Space>
-					<a onClick={handleDetail}>详情</a>
-					<a >禁用</a>
+					<a onClick={handleDetail}>Details</a>
+					<a >Disable</a>
 				</Space>
 			),
 		},
@@ -47,13 +47,13 @@ const MyCourse = memo(() => {
 		account: 'zhangyi',
 		email: '838383883838@qq.com',
 		createTime: '2022-09-08 08:35:26',
-		status: '启用',
+		status: 'Enable',
 	});
 
 	const handleApply = ()=> {
 		utils.confirm({
-			title: '课程申请',
-			content: '确定要申请该课程吗'
+			title: 'Course Application',
+			content: 'Are you sure you want to apply for this course?'
 		});
 	};
 
@@ -65,7 +65,7 @@ const MyCourse = memo(() => {
 		<div>
 			<Row>
 				<Col span={24} style={{ textAlign: 'right' }}>
-					<Button type="primary">添加账号</Button>
+					<Button type="primary">Add account</Button>
 				</Col>
 			</Row>
 			<Table
@@ -85,7 +85,7 @@ const MyCourse = memo(() => {
 			<Modal
 				title='Course detail'
 				visible={detailModalStatus}
-				confirmText="确定"
+				confirmText="Determine"
 				confirmCallback={()=> {
 					setDetailModalStatus(false);
 				}}

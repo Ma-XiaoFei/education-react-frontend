@@ -8,13 +8,13 @@ const HeaderComponent = memo(() => {
 			<div className="user-box">
 				<Space size={20}>
 					<span>
-						<i className="iconfont icon-user"></i>张同学
+						<i className="iconfont icon-user"></i>zhang
 					</span>
 					<span>
-						<i className="iconfont icon-lock"></i>修改密码
+						<i className="iconfont icon-lock"></i>Change password
 					</span>
 					<span>
-						<i className="iconfont icon-poweroff"></i>退出
+						<i className="iconfont icon-poweroff"></i>Exit
 					</span>
 				</Space>
 			</div>

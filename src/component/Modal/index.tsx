@@ -21,9 +21,9 @@ interface ModalPropsType {
 const Component: React.FC<ModalPropsType> = (props) => {
 	const {
 		visible,
-		cancelText = '取消',
-		confirmText = '保存',
-		title = '提示',
+		cancelText = 'Cancellation',
+		confirmText = 'Save',
+		title = 'Tips',
 		hasFooter,
 		cancelCallback = () => {},
 		confirmCallback = () => {},
@@ -35,7 +35,7 @@ const Component: React.FC<ModalPropsType> = (props) => {
 	return (
 		<Modal
 			title={title}
-			width={props.width || 450}
+			width={props.width || 600}
 			keyboard={false}
 			maskClosable={false}
 			visible={visible}

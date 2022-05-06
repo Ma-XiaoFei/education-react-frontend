@@ -71,7 +71,11 @@ const SiderComponent = memo(() => {
 				mode="inline"
 				selectedKeys={[ location.pathname ]}
 				items={menuItems}
-				onClick={({ key }) => navigate(key)}
+				onClick={({ key }) => {
+					if (location.pathname !== key) {
+						navigate(key);
+					}
+				}}
 			/>
 		</Sider>
 	);

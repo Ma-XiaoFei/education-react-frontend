@@ -1,42 +1,63 @@
-import React, { memo, useState } from 'react';
-import './index.less';
-import { Table, Space, Input, Row, Form, Select, Button } from 'antd';
-import { SearchOutlined, LockOutlined } from '@ant-design/icons';
+import React, { memo, useCallback, useState } from 'react';
+import { Table, Space, Input, Form, Select, Button } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 import { ColumnsType } from 'antd/es/table';
-import utils from '@/utils';
 import Modal from '@/component/Modal';
+import StudentsModal from '@/pages/LecturerMyCourse/StudentsModal';
 
-interface colType {
-  coursename: string;
+interface ColsType {
+	coursename: string
 }
 
-const AllCourse = memo(() => {
-	const [ form ] = Form.useForm();
+const data = Array(20).fill({
+	name: 'lucy',
+	email: '11111@aa.com',
+	institution: '111'
+});
+
+const MyCourse = memo(() => {
 	const [ detailModalStatus, setDetailModalStatus ] = useState(false);
-	const Tablecolumns: ColumnsType<colType> = [
+	const [ studentDetail, setStudentDetail ] = useState(false);
+	const [ studentData,setStudentData ] = useState([ ...data ]);
+	const Tablecolumns: ColumnsType<ColsType> = [
 		{
+			width: '120px',
+			title: 'Serial number',
+			render:(t: string,r: any,i: number)=> i+1
+		},
+		{
+			width: '200px',
 			title: 'Course Name',
 			dataIndex: 'coursename',
 		},
 		{
 			title: 'Start time',
-			width: '180px',
+			width: '200px',
 			dataIndex: 'starttime',
 		},
 		{
 			title: 'Duration',
+			width: '120px',
 			dataIndex: 'duration',
 		},
 		{
-			title: 'Lecturer',
-			dataIndex: 'lecturer',
+			title: 'Participating Students',
+			width: '150px',
+			dataIndex: 'studentsN',
+			render(text: string){
+				return (
+					<a onClick={showStudentDetail}>{text}</a>
+				);
+			}
 		},
 		{
-			title: 'Status',
+			title: 'Attendance rate',
+			width: '200px',
 			dataIndex: 'state',
 		},
 		{
-			title: 'Affiliation',
+			title: 'Assignment completion rate',
+			width: '200px',
 			dataIndex: 'organization',
 		},
 		{
@@ -47,55 +68,50 @@ const AllCourse = memo(() => {
 		{
 			title: 'Operation',
 			dataIndex: 'operation',
-			align: 'center',
-			width: '150px',
+			align:'center',
 			fixed: 'right',
+			width: '300px',
 			render: () => (
 				<Space>
 					<a onClick={handleDetail}>Details</a>
-					<a onClick={handleApply}>Application</a>
+					<a>Sign in</a>
+					<a>Assigning homework </a>
+					{/* <a>Job Management</a> */}
 				</Space>
 			),
 		},
 	];
 	const Tabledata = Array(20).fill({
 		key: '1',
-		coursename: 'name',
+		studentsN:12,
+		coursename: 'E-commerce operation tricks',
 		starttime: '2022-06-12 14:00:00',
-		duration: '120分钟',
-		lecturer: 'lucy',
+		duration: '120 minutes',
+		lecturer: 'Zhang Li',
 		state: 'Not started',
-		organization: 'Institution1',
-		description:
-      'Analysis of e-commerce operation skills from a professional perspective, class...',
+		organization: 'Institution 1',
+		description: 'Analysis of e-commerce operation skills from a professional perspective, class...',
 	});
 
-	const handleApply = () => {
-		utils.confirm({
-			title: 'Course Application',
-			content: 'Are you sure you want to apply for this course?',
-		});
+	const handleDetail = ()=> {
+		setDetailModalStatus(true);
 	};
 
-	const handleDetail = () => {
-		setDetailModalStatus(true);
+	const showStudentDetail = ()=> {
+		setStudentDetail(true);
 	};
 
 	return (
 		<div>
 			<Form
 				// form={form}
-				// name="horizontal_login"
 				layout="inline"
 				onFinish={(data) => {
 					console.log(data);
 				}}
 			>
 				<Form.Item name="username">
-					<Input
-						suffix={<SearchOutlined />}
-						placeholder="Please enter the name of the course/instructor"
-					/>
+					<Input suffix={<SearchOutlined />} placeholder="Enter the course/instructor name" />
 				</Form.Item>
 				<Form.Item name="status">
 					<Select
@@ -126,14 +142,14 @@ const AllCourse = memo(() => {
 			</Form>
 			<Table
 				style={{ marginTop: 12 }}
-				scroll={{ x: 1000, y: 1000 }}
+				scroll={{ x: 1000 }}
 				columns={Tablecolumns}
 				dataSource={Tabledata}
 				size="small"
 				pagination={{
 					// size:'default',
-					total: 500,
-					defaultCurrent: 2,
+					total: Tabledata.length,
+					defaultCurrent: 1,
 					showQuickJumper: true,
 				}}
 			/>
@@ -152,7 +168,6 @@ const AllCourse = memo(() => {
 				<Form
 					wrapperCol={{ span: 12 }}
 					labelCol={{ span: 10 }}
-					form={form}
 					onFinish={() => {}}
 				>
 					<Form.Item name="Course Name" label="Course Name">
@@ -164,8 +179,11 @@ const AllCourse = memo(() => {
 					<Form.Item name="starttime" label="Start Time">
             2022-01-01 12:00:00
 					</Form.Item>
-					<Form.Item name="starttime" label="Lecturer">
-            Lecturer
+					<Form.Item name="starttime" label="Course Description">
+						33 Minutes
+					</Form.Item>
+					<Form.Item name="starttime" label="Participating Students">
+						<a onClick={showStudentDetail}>50</a>
 					</Form.Item>
 					<Form.Item name="Course Description" label="Course Description">
             This course can help you quickly understand e-commerce operation
@@ -175,10 +193,18 @@ const AllCourse = memo(() => {
             understand e-commerce operation skills This course can help you
             quickly understand e-commerce operation skills
 					</Form.Item>
+					<Form.Item name="starttime" label="Status">
+                       Closed
+					</Form.Item>
 				</Form>
 			</Modal>
+
+			<StudentsModal
+				setStudentDetail={(f)=> setStudentDetail(f)}
+				studentDetail={studentDetail}
+			/>
 		</div>
 	);
 });
 
-export default AllCourse;
+export default MyCourse;

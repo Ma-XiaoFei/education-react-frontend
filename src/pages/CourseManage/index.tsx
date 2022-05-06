@@ -27,48 +27,48 @@ const CourseManage = memo(() => {
 	const [ detailModalStatus, setDetailModalStatus ] = useState(false);
 	const Tablecolumns: ColumnsType<ColsType> = [
 		{
-			title: '序号',
+			title: 'Serial number',
 			render: (t: string, r: any, i: number) => i + 1,
 		},
 		{
-			title: '课程名称',
+			title: 'Course Name',
 			dataIndex: 'coursename',
 		},
 		{
-			title: '开始时间',
+			title: 'Start time',
 			dataIndex: 'starttime',
 		},
 		{
-			title: '时长',
+			title: 'Duration',
 			dataIndex: 'duration',
 		},
 		{
-			title: '讲师',
+			title: 'Lecturer',
 			dataIndex: 'lecturer',
 		},
 		{
-			title: '状态',
+			title: 'Status',
 			dataIndex: 'state',
 		},
 		{
-			title: '所属机构',
+			title: 'Affiliation',
 			dataIndex: 'organization',
 		},
 		{
-			title: '课程描述',
+			title: 'Course Description',
 			dataIndex: 'description',
 		},
 		{
-			title: '操作',
+			title: 'Operation',
 			dataIndex: 'operation',
 			align: 'center',
 			fixed: 'right',
-			width: '150px',
+			width: '220px',
 			render: () => (
 				<Space>
-					<a onClick={handleDetail}>详情</a>
-					<a>评分</a>
-					<a>作业</a>
+					<a onClick={handleDetail}>Details</a>
+					<a>Rating</a>
+					<a>Assignments</a>
 				</Space>
 			),
 		},
@@ -76,53 +76,53 @@ const CourseManage = memo(() => {
 	const Tabledata = [
 		{
 			key: '1',
-			coursename: '电商运营妙招',
+			coursename: 'E-commerce operation tricks',
 			starttime: '2022-06-12 14:00:00',
-			duration: '120分钟',
-			lecturer: '张立',
-			state: '未开始',
-			organization: '机构1',
-			description: '从专业角度分析电商运营技巧，课…',
+			duration: '120 minutes',
+			lecturer: 'Zhang Li',
+			state: 'Not started',
+			organization: 'Institution 1',
+			description: 'Analysis of e-commerce operation skills from a professional perspective, class...',
 		},
 		{
 			key: '2',
-			coursename: '电商运营妙招',
+			coursename: 'E-commerce operation tricks',
 			starttime: '2022-06-12 14:00:00',
-			duration: '120分钟',
-			lecturer: '张立',
-			state: '未开始',
-			organization: '机构1',
-			description: '从专业角度分析电商运营技巧，课…',
+			duration: '120 minutes',
+			lecturer: 'Zhang Li',
+			state: 'Not started',
+			organization: 'Institution 1',
+			description: 'Analysis of e-commerce operation skills from a professional perspective, class...',
 		},
 		{
 			key: '3',
-			coursename: '电商运营妙招',
+			coursename: 'E-commerce operation tricks',
 			starttime: '2022-06-12 14:00:00',
-			duration: '120分钟',
-			lecturer: '张立',
-			state: '未开始',
-			organization: '机构1',
-			description: '从专业角度分析电商运营技巧，课…',
+			duration: '120 minutes',
+			lecturer: 'Zhang Li',
+			state: 'Not started',
+			organization: 'Institution 1',
+			description: 'Analysis of e-commerce operation skills from a professional perspective, class...',
 		},
 		{
 			key: '4',
-			coursename: '电商运营妙招',
+			coursename: 'E-commerce operation tricks',
 			starttime: '2022-06-12 14:00:00',
-			duration: '120分钟',
-			lecturer: '张立',
-			state: '未开始',
-			organization: '机构1',
-			description: '从专业角度分析电商运营技巧，课…',
+			duration: '120 minutes',
+			lecturer: 'Zhang Li',
+			state: 'Not started',
+			organization: 'Institution 1',
+			description: 'Analysis of e-commerce operation skills from a professional perspective, class...',
 		},
 		{
 			key: '5',
-			coursename: '电商运营妙招',
+			coursename: 'E-commerce operation tricks',
 			starttime: '2022-06-12 14:00:00',
-			duration: '120分钟',
-			lecturer: '张立',
-			state: '未开始',
-			organization: '机构1',
-			description: '从专业角度分析电商运营技巧，课…',
+			duration: '120 minutes',
+			lecturer: 'Zhang Li',
+			state: 'Not started',
+			organization: 'Institution 1',
+			description: 'Analysis of e-commerce operation skills from a professional perspective, class...',
 		},
 	];
 	const handleDetail = ()=> {
@@ -137,7 +137,7 @@ const CourseManage = memo(() => {
 					console.log(e);
 				}}
 			>
-				<TabPane tab="课程管理" key="1">
+				<TabPane tab="Course Management" key="1">
 					<Row>
 						<Col span={20}>
 							<Form
@@ -151,24 +151,24 @@ const CourseManage = memo(() => {
 								<Form.Item name="username">
 									<Input
 										suffix={<SearchOutlined />}
-										placeholder="输入课程/讲师名称"
+										placeholder="Enter the course/instructor name"
 									/>
 								</Form.Item>
 								<Form.Item name="status">
 									<Select
 										style={{ width: 200 }}
-										placeholder="请选择状态"
+										placeholder="Please select the status"
 										options={[
 											{
-												label: '未开始',
+												label: 'Not started',
 												value: 0,
 											},
 											{
-												label: '进行中',
+												label: 'In progress',
 												value: 1,
 											},
 											{
-												label: '已结束',
+												label: 'Closed',
 												value: 3,
 											},
 										]}
@@ -176,14 +176,14 @@ const CourseManage = memo(() => {
 								</Form.Item>
 								<Form.Item>
 									<Space>
-										<Button type="primary">查询</Button>
-										<Button>重置</Button>
+										<Button type="primary">Inquiry</Button>
+										<Button>Reset</Button>
 									</Space>
 								</Form.Item>
 							</Form>
 						</Col>
 						<Col span={4} style={{ textAlign: 'right' }}>
-							<Button type="primary">添加课程</Button>
+							<Button type="primary">Add a course</Button>
 						</Col>
 					</Row>
 
@@ -201,14 +201,14 @@ const CourseManage = memo(() => {
 						}}
 					/>
 				</TabPane>
-				<TabPane tab="课程申请" key="2">
+				<TabPane tab="Course Application" key="2">
 					<CourseApply/>
 				</TabPane>
 			</Tabs>
 			<Modal
 				title='Course detail'
 				visible={detailModalStatus}
-				confirmText="确定"
+				confirmText="Determine"
 				confirmCallback={()=> {
 					setDetailModalStatus(false);
 				}}
