@@ -9,12 +9,14 @@ import {
 	Row,
 	Col,
 	Tabs,
+	DatePicker,
 } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { ColumnsType } from 'antd/es/table';
 import CourseApply from './CourseApply';
 import './index.less';
 import Modal from '@/component/Modal';
+import utils from '@/utils';
 
 const { TabPane } = Tabs;
 
@@ -25,6 +27,7 @@ interface ColsType {
 const CourseManage = memo(() => {
 	const [ form ] = Form.useForm();
 	const [ detailModalStatus, setDetailModalStatus ] = useState(false);
+	const [ addCource, setAddCource ] = useState(false);
 	const Tablecolumns: ColumnsType<ColsType> = [
 		{
 			title: 'Serial number',
@@ -67,12 +70,12 @@ const CourseManage = memo(() => {
 			render: () => (
 				<Space>
 					<a onClick={handleDetail}>Details</a>
-					<a>Rating</a>
-					<a>Assignments</a>
+					<a onClick={handleDelete}>Delete</a>
 				</Space>
 			),
 		},
 	];
+
 	const Tabledata = [
 		{
 			key: '1',
@@ -125,8 +128,16 @@ const CourseManage = memo(() => {
 			description: 'Analysis of e-commerce operation skills from a professional perspective, class...',
 		},
 	];
+
 	const handleDetail = ()=> {
 		setDetailModalStatus(true);
+	};
+
+	const handleDelete = ()=> {
+		utils.confirm({
+			content: 'Are you sure you want to delete it?',
+			onOk: ()=> {}
+		});
 	};
 
 	return (
@@ -182,8 +193,11 @@ const CourseManage = memo(() => {
 								</Form.Item>
 							</Form>
 						</Col>
-						<Col span={4} style={{ textAlign: 'right' }}>
-							<Button type="primary">Add a course</Button>
+						<Col
+							span={4}
+							style={{ textAlign: 'right' }}
+							onClick={()=> setAddCource(true)}>
+							<Button type="primary">Add course</Button>
 						</Col>
 					</Row>
 
@@ -194,7 +208,6 @@ const CourseManage = memo(() => {
 						dataSource={Tabledata}
 						size="small"
 						pagination={{
-							// size:'default',
 							total: 500,
 							defaultCurrent: 2,
 							showQuickJumper: true,
@@ -206,18 +219,20 @@ const CourseManage = memo(() => {
 				</TabPane>
 			</Tabs>
 			<Modal
-				title='Course detail'
-				visible={detailModalStatus}
+				title={addCource ? 'Add Cource' : 'Course Detail'}
+				visible={detailModalStatus || addCource}
 				confirmText="Determine"
 				confirmCallback={()=> {
 					setDetailModalStatus(false);
+					setAddCource(false);
 				}}
 				cancelCallback={()=> {
 					setDetailModalStatus(false);
+					setAddCource(false);
 				}}>
 				<Form
-					wrapperCol={{ span: 12 }}
-					labelCol={{ span: 12 }}
+					wrapperCol={{ span: 9 }}
+					labelCol={{ span: 9 }}
 					form={form}
 					onFinish={()=> {
 
@@ -227,20 +242,75 @@ const CourseManage = memo(() => {
 						name='Course Name'
 						label='Course Name'
 					>
-						sss
+						<Input />
 					</Form.Item>
 					<Form.Item
-						name='Course Name'
-						label='Course Name'
+						name='Pre-course'
+						label='Pre-course'
 					>
-						sss
+						<Input />
 					</Form.Item>
 					<Form.Item
-						name='Course Name'
-						label='Course Name'
+						name='Start time'
+						label='Start time'
 					>
-						sss
+						<DatePicker showTime />
 					</Form.Item>
+					<Form.Item
+						name='Duration'
+						label='Duration'
+					>
+						<Input />
+					</Form.Item>
+					<Form.Item
+						name='Lecturer'
+						label='Lecturer'
+					>
+						<Input />
+					</Form.Item>
+					<Form.Item
+						name='ke'
+						label='Available institutions'
+					>
+						<Input />
+					</Form.Item>
+					{
+						!addCource ?
+							(
+								<Form.Item
+									label='Participating Students'
+								>
+									8
+								</Form.Item>
+							)
+							: null
+					}
+					<Form.Item
+						label='Course Description'
+					>
+						<Input.TextArea style={{ width: 200 , height: 100 }} placeholder="Please enter" />
+					</Form.Item>
+					{
+						!addCource ? (<>
+							<Form.Item
+								label='Status'
+							>
+								Closed
+							</Form.Item>
+							<Form.Item
+								label='Rating'
+							>
+								4
+							</Form.Item>
+							<Form.Item
+								label='Creation time'
+							>
+								2022-01-01 12:00:00
+							</Form.Item>
+						</>
+						)
+							: null
+					}
 				</Form>
 			</Modal>
 		</div>

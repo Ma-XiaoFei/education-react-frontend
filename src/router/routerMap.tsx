@@ -4,7 +4,7 @@ import wrapper from './wrapper';
 import NotFound from '@/pages/Error/404';
 import Layout from '@/Layout';
 import Login from '@/pages/Login';
-//学生角色
+//Student角色
 const StudentHome = React.lazy(() => import('@/pages/StudentHome'));
 const AllCourse = React.lazy(() => import('@/pages/AllCourse'));
 const StudentMyCourse = React.lazy(() => import('@/pages/StudentMyCourse'));

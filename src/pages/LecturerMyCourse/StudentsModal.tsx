@@ -22,12 +22,15 @@ const StudentsModal: React.FC<PropsType> = memo((props) => {
 	const [ studentData, setStudentData ] = useState([ ...data ]);
 	const studentsCol: ColumnsType<StudentsColsType> = [
 		{
+			title: 'Student',
 			dataIndex: 'name',
 		},
 		{
+			title: 'email',
 			dataIndex: 'email',
 		},
 		{
+			title: 'institution',
 			dataIndex: 'institution',
 		},
 	];

@@ -62,7 +62,7 @@ const AllCourse = memo(() => {
 		key: '1',
 		coursename: 'name',
 		starttime: '2022-06-12 14:00:00',
-		duration: '120分钟',
+		duration: '120minutes',
 		lecturer: 'lucy',
 		state: 'Not started',
 		organization: 'Institution1',

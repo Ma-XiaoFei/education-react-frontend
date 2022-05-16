@@ -251,7 +251,7 @@ const MyCourse = memo(() => {
 					</Form.Item>
 				</Form>
 			</Modal>
-			{/* 评分 */}
+			{/* Rating */}
 			<Modal
 				title="Rating"
 				visible={rateModalStatus}
@@ -302,7 +302,7 @@ const MyCourse = memo(() => {
 					</Timeline.Item>
 					<Timeline.Item>
 						<Upload>
-							<Button type='primary'>选择文件</Button> <span style={{ color: '#B9B9B9' }}>(Support word/pdf/png,No more than 10M)</span>
+							<Button type='primary'>Select file</Button> <span style={{ color: '#B9B9B9' }}>(Support word/pdf/png,No more than 10M)</span>
 						</Upload>
 					</Timeline.Item>
 				</Timeline>

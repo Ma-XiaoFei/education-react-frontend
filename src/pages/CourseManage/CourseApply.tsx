@@ -12,6 +12,7 @@ import {
 } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { ColumnsType } from 'antd/es/table';
+import utils from '@/utils';
 
 const { TabPane } = Tabs;
 
@@ -66,8 +67,8 @@ const CourseApply = memo(() => {
 				render: () => {
 					return key === '1' ? (
 						<Space>
-							<a>By</a>
-							<a>Rejected</a>
+							<a onClick={handleAlert.bind(null, 'pass')}>By</a>
+							<a onClick={handleAlert.bind(null, 'reject')}>Rejected</a>
 						</Space>
 					) : (
 						'By'
@@ -130,6 +131,13 @@ const CourseApply = memo(() => {
 			description: 'Analysis of e-commerce operation skills from a professional perspective, class...',
 		},
 	];
+
+	const handleAlert = (s: string)=> {
+		utils.confirm({
+			content: `Are you sure you want to ${s} the application?`
+		});
+	};
+
 	return (
 		<div id="course-apply" style={{ marginTop: '-10px' }}>
 			<Tabs
@@ -142,8 +150,6 @@ const CourseApply = memo(() => {
 					<Row>
 						<Col span={20}>
 							<Form
-								// form={form}
-								// name="horizontal_login"
 								layout="inline"
 								onFinish={(data) => {
 									console.log(data);
@@ -155,23 +161,19 @@ const CourseApply = memo(() => {
 										placeholder="Enter the course/instructor name"
 									/>
 								</Form.Item>
-								<Form.Item name="status">
+								<Form.Item name="result">
 									<Select
 										style={{ width: 200 }}
-										placeholder="Please select the status"
+										placeholder="Please select approval result"
 										options={[
 											{
-												label: 'Not started',
+												label: 'Rejected',
 												value: 0,
 											},
 											{
-												label: 'In progress',
+												label: 'By',
 												value: 1,
-											},
-											{
-												label: 'Closed',
-												value: 3,
-											},
+											}
 										]}
 									/>
 								</Form.Item>

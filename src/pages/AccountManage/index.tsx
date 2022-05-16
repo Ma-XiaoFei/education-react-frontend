@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react';
-import { Table, Space, Input, Form, Select, Button, Row, Col } from 'antd';
+import { Table, Space, Input, Form, Select, Button, Row, Col, Radio } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { ColumnsType } from 'antd/es/table';
 import Modal from '@/component/Modal';
@@ -11,7 +11,10 @@ interface ColsType {
 
 const MyCourse = memo(() => {
 	const [ form ] = Form.useForm();
-	const [ detailModalStatus, setDetailModalStatus ] = useState(false);
+	const [ detailModal, setDetailModal ] = useState(false);
+	const [ addAccountModal, setAddAccountModal ] = useState(false);
+	const [ editRecord, setEditRecord ] = useState({});
+
 	const Tablecolumns: ColumnsType<ColsType> = [
 		{
 			title: 'Account Number',
@@ -24,6 +27,7 @@ const MyCourse = memo(() => {
 		{
 			title: 'Status',
 			dataIndex: 'status',
+			render:(t)=> <> {t === 1 ? 'valid' : 'Invalid'}</>
 		},
 		{
 			title: 'Creation time',
@@ -34,10 +38,10 @@ const MyCourse = memo(() => {
 			dataIndex: 'operation',
 			align: 'center',
 			fixed: 'right',
-			render: () => (
+			render: (t,record) => (
 				<Space>
-					<a onClick={handleDetail}>Details</a>
-					<a >Disable</a>
+					<a onClick={handleDetail.bind(null, record)}>Details</a>
+					<a onClick={handleDisable}>Disable</a>
 				</Space>
 			),
 		},
@@ -47,25 +51,31 @@ const MyCourse = memo(() => {
 		account: 'zhangyi',
 		email: '838383883838@qq.com',
 		createTime: '2022-09-08 08:35:26',
-		status: 'Enable',
+		status: '1',
 	});
 
-	const handleApply = ()=> {
+	const handleDisable = ()=> {
 		utils.confirm({
-			title: 'Course Application',
-			content: 'Are you sure you want to apply for this course?'
+			content: 'Are you sure you want to disable the operation with due care?'
 		});
 	};
 
-	const handleDetail = ()=> {
-		setDetailModalStatus(true);
+	const handleDetail = (record: any)=> {
+		setEditRecord(record);
+		setDetailModal(true);
 	};
 
 	return (
 		<div>
 			<Row>
-				<Col span={24} style={{ textAlign: 'right' }}>
-					<Button type="primary">Add account</Button>
+				<Col
+					span={24}
+					style={{ textAlign: 'right' }}>
+					<Button
+						type="primary"
+						onClick={()=> setAddAccountModal(true)}>
+							Add account
+					</Button>
 				</Col>
 			</Row>
 			<Table
@@ -75,48 +85,67 @@ const MyCourse = memo(() => {
 				dataSource={Tabledata}
 				size="small"
 				pagination={{
-					// size:'default',
-					total: 500,
-					defaultCurrent: 2,
+					total: 20,
+					defaultCurrent: 1,
 					showQuickJumper: true,
 				}}
 			/>
-
 			<Modal
-				title='Course detail'
-				visible={detailModalStatus}
+				title={addAccountModal ? 'Add Account': 'Account Detail'}
+				visible={addAccountModal||detailModal}
 				confirmText="Determine"
 				confirmCallback={()=> {
-					setDetailModalStatus(false);
+					setAddAccountModal(false);
+					setDetailModal(false);
+					setEditRecord({});
 				}}
 				cancelCallback={()=> {
-					setDetailModalStatus(false);
+					setAddAccountModal(false);
+					setDetailModal(false);
+					setEditRecord({});
 				}}>
 				<Form
-					wrapperCol={{ span: 12 }}
-					labelCol={{ span: 12 }}
-					form={form}
-					onFinish={()=> {
-
+					wrapperCol={{ span: 9 }}
+					labelCol={{ span: 9 }}
+					onFinish={(data)=> {
 					}}
+					initialValues={editRecord}
+					// form={addOrgForm}
 				>
 					<Form.Item
-						name='Course Name'
-						label='Course Name'
+						name='account'
+						label='Account Number'
 					>
-						sss
+						<Input
+							disabled={detailModal}
+							placeholder="Please enter"
+							maxLength={40}/>
 					</Form.Item>
 					<Form.Item
-						name='Course Name'
-						label='Course Name'
+						name='ss'
+						label='Password'
 					>
-						sss
+						{addAccountModal ?
+							(
+								<Input placeholder="Please enter" maxLength={8}/>
+							)
+							: <a>重置Password</a>
+						}
 					</Form.Item>
 					<Form.Item
-						name='Course Name'
-						label='Course Name'
+						name='email'
+						label='Mailbox'
 					>
-						sss
+						<Input placeholder="Please enter"/>
+					</Form.Item>
+					<Form.Item
+						name='status'
+						label='Status'
+					>
+						<Radio.Group>
+							<Radio value="1">Enable</Radio>
+							<Radio value="0">Disable</Radio>
+						</Radio.Group>
 					</Form.Item>
 				</Form>
 			</Modal>
