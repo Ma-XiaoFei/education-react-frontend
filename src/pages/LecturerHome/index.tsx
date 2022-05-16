@@ -15,6 +15,7 @@ interface ColsType {
 
 const Tabledata: ColsType[] = [
 	...Array.from({ length: 50 }, () => ({
+		teacher: 's',
 		key: Math.random(),
 		lessonName: 'Name',
 		student: 'lucy',
